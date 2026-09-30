@@ -2,6 +2,8 @@
 Monta as janelas deslizantes (nowcast e forecast) e o split temporal
 treino/validacao/teste, e calcula o baseline (E1) para os dois horizontes.
 """
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import (
@@ -9,7 +11,8 @@ from sklearn.metrics import (
     average_precision_score, confusion_matrix,
 )
 
-DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+DATA_DIR = BASE_DIR / "data"
 WINDOW = 12
 
 # Split temporal (ver justificativa no relatorio: teste inteiramente no

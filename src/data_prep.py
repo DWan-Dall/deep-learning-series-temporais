@@ -1,6 +1,6 @@
 """
 Pipeline de dados - Trabalho Final de Aprendizado Profundo (Problema 3: séries temporais)
-Daiane Wandall - PPGCA/UNIVALI
+Daiane Wan-Dall - PPGCA/UNIVALI
 
 Le a base Consolidado (municipio x mes), constroi a variavel resposta binaria
 (ocorreu algum desastre no municipio-mes), seleciona as features climaticas
@@ -11,10 +11,13 @@ municipio para alimentar RNN/LSTM/GRU, em dois horizontes:
 
 Tambem define o split temporal treino/validacao/teste.
 """
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
-DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+DATA_DIR = BASE_DIR / "data"
 WINDOW = 12  # meses de historico usados como entrada da rede
 
 # ---------------------------------------------------------------------------

@@ -8,6 +8,8 @@ no nowcast (mesma janela/hiperparametros) para justificar a escolha de arquitetu
 """
 import json
 import time
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
@@ -16,8 +18,9 @@ from sklearn.metrics import (
     precision_score, recall_score, f1_score, roc_auc_score, average_precision_score,
 )
 
-DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
-OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+DATA_DIR = BASE_DIR / "data"
+OUT_DIR = BASE_DIR / "outputs"
 SEED = 42
 
 torch.manual_seed(SEED)

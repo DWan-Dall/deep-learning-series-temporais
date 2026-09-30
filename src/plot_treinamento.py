@@ -4,6 +4,8 @@ epoca) para E2 (nowcast) e E3 (forecast), exigido no checklist do enunciado
 ("Historico de treinamento apresentado"). Retreina do zero so para capturar
 o log epoca a epoca (os pesos finais salvos em outputs/ nao mudam).
 """
+from pathlib import Path
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -14,7 +16,8 @@ from sklearn.metrics import roc_auc_score
 
 from model_rnn import RNNClassifier, carregar, to_tensors, DEVICE, SEED
 
-OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+OUT_DIR = BASE_DIR / "outputs"
 
 
 def treinar_com_log(model, Xtr, ytr, Xval, yval, epochs=30, lr=1e-3, batch_size=128):

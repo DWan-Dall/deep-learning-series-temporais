@@ -6,6 +6,8 @@ Isso evita o problema anterior (limiar = prevalencia, que degenerava em
 "prever quase tudo positivo") e evita usar o teste pra escolher o limiar
 (vazamento).
 """
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
@@ -15,8 +17,9 @@ from sklearn.metrics import (
 
 from model_rnn import RNNClassifier, carregar, to_tensors, DEVICE
 
-DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
-OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+DATA_DIR = BASE_DIR / "data"
+OUT_DIR = BASE_DIR / "outputs"
 MELHOR_CELL = "LSTM"
 
 

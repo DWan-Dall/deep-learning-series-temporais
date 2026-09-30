@@ -10,17 +10,20 @@ Variacoes:
 """
 import sys
 import time
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
 
-sys.path.insert(0, "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/src")
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+sys.path.insert(0, str(BASE_DIR / "src"))
 from windows_and_split import build_windows, split_mask
 from model_rnn import RNNClassifier, treinar, DEVICE, SEED
 from calibrar_limiar import melhor_limiar_f1, metrics_com_limiar
 
-DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
-OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
+DATA_DIR = BASE_DIR / "data"
+OUT_DIR = BASE_DIR / "outputs"
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)

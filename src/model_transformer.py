@@ -10,6 +10,8 @@ no tempo -> camada linear -> logit. E um encoder-only, sem decoder, que e o
 padrao usual para classificacao (nao geracao) de sequencias.
 """
 import time
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import torch
@@ -18,7 +20,8 @@ import torch.nn as nn
 from model_rnn import carregar, to_tensors, treinar, avaliar, DEVICE, SEED
 from calibrar_limiar import melhor_limiar_f1, metrics_com_limiar
 
-OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
+BASE_DIR = Path(__file__).resolve().parent.parent  # raiz do projeto (pasta acima de src/)
+OUT_DIR = BASE_DIR / "outputs"
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)
