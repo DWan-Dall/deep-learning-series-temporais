@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "torch_version": "2.14.0+cu130",
+  "device": "cuda",
+  "arquitetura_escolhida": "LSTM",
+  "window": 12,
+  "epocas_E2": 1,
+  "epocas_E3": 1,
+  "tempo_total_s": 3.1
+}

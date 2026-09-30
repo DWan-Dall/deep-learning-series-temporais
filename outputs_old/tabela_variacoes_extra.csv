@@ -1,0 +1,7 @@
+experimento,horizonte,janela,camadas,melhor_epoca_val,limiar,precision,recall,f1,roc_auc,pr_auc
+Original (referencia),Nowcast,12,1,1,0.5154,0.2317,0.4184,0.2982,0.5897,0.2389
+Original (referencia),Forecast t+1,12,1,1,0.4994,0.1758,0.3542,0.235,0.5108,0.1876
+Janela maior (24 meses),Nowcast,24,1,1,0.5028,0.2406,0.4374,0.3104,0.594,0.244
+Janela maior (24 meses),Forecast t+1,24,1,1,0.5003,0.1786,0.3542,0.2375,0.5052,0.1845
+Mais camadas (2x LSTM),Nowcast,12,2,1,0.5031,0.1991,0.4421,0.2746,0.555,0.2048
+Mais camadas (2x LSTM),Forecast t+1,12,2,3,0.5256,0.1928,0.347,0.2478,0.5127,0.1872

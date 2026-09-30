@@ -1,0 +1,21 @@
+"modelo";"familia";"esquema";"n";"deviance";"pseudo_r2";"rmse";"mae";"spearman";"auc";"soma_obs";"soma_prev";"vies_pct"
+"Random forest";"Aprendizado de máquina";"Blocos de anos";1190;1089,2159;0,0647;0,6504;0,48;0,2276;0,6387;414;444,369;7,3355
+"Gradient boosting";"Aprendizado de máquina";"Blocos de anos";1190;1147,8551;0,0143;0,6574;0,455;0,1871;0,6131;414;363,3967;-12,223
+"GLMM dentro/entre";"Estatística";"Blocos de anos";1190;1165,5967;-0,0009;0,6765;0,4532;0,2278;0,6402;414;379,2349;-8,3974
+"Média histórica do município";"Referência";"Blocos de anos";1190;1170,4355;-0,005;0,6633;0,4934;0,0967;0,5577;414;414;0
+"Elastic net";"Estatística";"Blocos de anos";1190;1192,7712;-0,0242;0,6914;0,4667;0,2032;0,6238;414;398,0649;-3,8491
+"GLMM Poisson";"Estatística";"Blocos de anos";1190;1225,7548;-0,0525;0,686;0,4733;0,1472;0,5882;414;387,0818;-6,502
+"Rede neural";"Aprendizado profundo";"Blocos de anos";1190;1306,043;-0,1215;0,6921;0,4668;0,1138;0,5716;414;344,9671;-16,6746
+"GLM Poisson";"Estatística";"Blocos de anos";1190;1359,6507;-0,1675;0,7368;0,4978;0,0909;0,5506;414;406,5958;-1,7884
+"Taxa constante";"Referência";"Blocos de anos";1190;1387,1047;-0,1911;0,8033;0,6008;0,1002;0,5624;414;653,8517;57,9352
+"GAM";"Estatística";"Blocos de anos";1190;1396,906;-0,1995;0,7176;0,481;0,1077;0,566;414;398,7353;-3,6871
+"Gradient boosting";"Aprendizado de máquina";"Blocos de municípios";1190;1097,7752;0,0573;0,7005;0,4786;0,2768;0,6691;414;474,2578;14,555
+"Random forest";"Aprendizado de máquina";"Blocos de municípios";1190;1120,4195;0,0379;0,6575;0,5386;0,2714;0,6662;414;642,5048;55,1944
+"Média histórica do município";"Referência";"Blocos de municípios";1190;1170,4355;-0,005;0,6633;0,4934;0,0967;0,5577;414;414;0
+"GLMM dentro/entre";"Estatística";"Blocos de municípios";1190;1176,751;-0,0105;0,8092;0,5102;0,2868;0,6764;414;569,9912;37,679
+"Rede neural";"Aprendizado profundo";"Blocos de municípios";1190;1289,2374;-0,1071;0,7199;0,48;0,1391;0,5813;414;403,4321;-2,5526
+"Elastic net";"Estatística";"Blocos de municípios";1190;1299,4049;-0,1158;0,7814;0,5146;0,1916;0,6156;414;497,2291;20,1037
+"Taxa constante";"Referência";"Blocos de municípios";1190;1387,1047;-0,1911;0,8033;0,6008;0,1002;0,5624;414;653,8517;57,9352
+"GLM Poisson";"Estatística";"Blocos de municípios";1190;1714,8433;-0,4725;1,4503;0,6906;0,1552;0,591;414;723,2394;74,6955
+"GAM";"Estatística";"Blocos de municípios";1190;1733,4131;-0,4885;1,5699;0,8027;0,2529;0,655;414;1016,3545;145,4962
+"GLMM Poisson";"Estatística";"Blocos de municípios";1190;2346,2537;-1,0147;2,969;0,996;0,1797;0,6079;414;1110,0463;168,1271

@@ -1,0 +1,256 @@
+########################################################################
+## MODELAGEM DOS EVENTOS HIDROLÓGICOS - OBJETIVO 02
+## Enxurradas, Inundações e Alagamentos nos municípios costeiros de SC
+########################################################################
+
+Gerado em: 21/08/2026 11:29
+Script   : script_Objetivo_02_modelagem_ver00.R
+
+########################################################################
+## 1. BASE ANALÍTICA
+########################################################################
+
+   Janela                     : 1991-2024 (interseção Atlas x MapBiomas)
+   Unidade                    : município-ano
+   Observações                : 1.190 (35 municípios x 34 anos)
+   Eventos                    : 414 (67% enxurradas, 16% inundações, 17% alagamentos)
+   Município-anos com evento  : 320 (26.9%)
+   Razão variância/média      : 1.27
+   Preditores candidatos      : 24
+   Preditores após as podas   : 15 (15 componentes DENTRO, 6 ENTRE)
+
+########################################################################
+## 2. FAMÍLIA DE CONTAGEM
+########################################################################
+
+   Poisson + efeito de município               AIC =   1686.9 | dispersão = 1.07 | zeros prev. =   882
+   Poisson inflado de zeros + município        AIC =   1688.9 | dispersão = 1.07 | zeros prev. =   882
+   Binomial negativo II + efeito de município  AIC =   1688.9 | dispersão = 1.07 | zeros prev. =   882
+   Poisson (sem termo municipal)               AIC =   1710.7 | dispersão = 1.43 | zeros prev. =   891
+   Binomial negativo (sem termo municipal)     AIC =   1711.3 | dispersão = 1.40 | zeros prev. =   895
+   Binomial negativo I + efeito de município   AIC =       NA | dispersão = 1.07 | zeros prev. =   882
+   Zeros observados: 870
+
+   Família selecionada: Poisson + efeito de município.
+   A dispersão de Pearson cai de 1.43 para 1.07 com a entrada do termo
+   municipal: a sobredispersão aparente era heterogeneidade ENTRE
+   municípios, não variabilidade extra do processo. O binomial
+   negativo não acrescenta ajuste e a inflação de zeros não é
+   necessária - resultado que replica, na escala anual e para os
+   três tipos hidrológicos, o da análise exploratória integrada.
+
+########################################################################
+## 3. O QUE EXPLICA OS EVENTOS - MODELO DENTRO/ENTRE
+########################################################################
+
+   3.1 GATILHO - o que faz um ANO ser pior que outro no mesmo
+       município (componentes DENTRO, significativos a 5%):
+
+       Cobertura florestal                   RR = 0.75 [0.66-0.86] | -25%
+       Campo alagado e área pantanosa        RR = 1.32 [1.12-1.55] | +32%
+       Temperatura média do ano              RR = 0.76 [0.67-0.87] | -24%
+       Maior total mensal                    RR = 1.28 [1.12-1.46] | +28%
+       Expansão urbana no quinquênio         RR = 0.85 [0.75-0.97] | -15%
+       Cobertura de nuvens média             RR = 1.16 [1.01-1.33] | +16%
+       Fração vegetada da mancha urbana      RR = 0.88 [0.78-0.99] | -12%
+
+   3.2 PREDISPOSIÇÃO - o que faz um MUNICÍPIO ser pior que outro
+       (componentes ENTRE, significativos a 5%):
+
+       Anomalia média do ano                 RR = 2.28 [1.70-3.04] | +128%
+       Cobertura de nuvens média             RR = 0.63 [0.49-0.82] | -37%
+       Chuva de inverno                      RR = 1.42 [1.16-1.73] | +42%
+
+   Razões de taxa por desvio-padrão do componente. A variância do efeito
+   municipal cai de 0.472 no modelo sem decomposição para 0.148 com ela:
+   os termos ENTRE absorveram a heterogeneidade que antes era
+   atribuída à identidade do município.
+
+########################################################################
+## 4. NÃO-LINEARIDADE E ESTRUTURA ESPACIAL (GAM)
+########################################################################
+
+   Deviance explicada         : 34.6%
+   Termos suaves significativos: 9 de 17
+
+   Identidade do município                   edf = 15.10 | Marcadamente não linear
+   Superfície espacial (lon, lat)            edf =  3.21 | Marcadamente não linear
+   Cobertura florestal (dentro)              edf =  2.90 | Marcadamente não linear
+   Temperatura média do ano (dentro)         edf =  1.86 | Curvatura moderada
+   Campo alagado e área pantanosa (dentro)   edf =  2.82 | Marcadamente não linear
+   Área urbanizada (dentro)                  edf =  2.64 | Marcadamente não linear
+   Maior total mensal (dentro)               edf =  0.90 | Praticamente linear
+   Anomalia média do ano (dentro)            edf =  0.86 | Praticamente linear
+   Fração vegetada da mancha urbana (dentro) edf =  1.49 | Curvatura moderada
+   Chuva de inverno (dentro)                 edf =  1.36 | Curvatura moderada
+   Expansão urbana no quinquênio (dentro)    edf =  0.75 | Praticamente linear
+   Chuva de verão (dentro)                   edf =  0.75 | Praticamente linear
+   Cobertura de nuvens média (dentro)        edf =  0.94 | Praticamente linear
+   Variação florestal no quinquênio (dentro) edf =  0.40 | Praticamente linear
+   Meses de vento acima do p90 local (dentro)edf =  0.00 | Anulado pela penalização
+   Meses acima do p95 local (dentro)         edf =  0.00 | Anulado pela penalização
+   Meses acima do p90 local (dentro)         edf =  0.00 | Anulado pela penalização
+
+########################################################################
+## 5. DESEMPENHO PREDITIVO FORA DA AMOSTRA
+########################################################################
+
+   BLOCOS DE ANOS (prever um ano não visto):
+
+   Random forest                   pseudo-R2 = +0.065 | AUC = 0.639 | viés = +7%
+   Gradient boosting               pseudo-R2 = +0.014 | AUC = 0.613 | viés = -12%
+   GLMM dentro/entre               pseudo-R2 = -0.001 | AUC = 0.640 | viés = -8%
+   Média histórica do município    pseudo-R2 = -0.005 | AUC = 0.558 | viés = +0%
+   Elastic net                     pseudo-R2 = -0.024 | AUC = 0.624 | viés = -4%
+   GLMM Poisson                    pseudo-R2 = -0.053 | AUC = 0.588 | viés = -7%
+   Rede neural                     pseudo-R2 = -0.121 | AUC = 0.572 | viés = -17%
+   GLM Poisson                     pseudo-R2 = -0.168 | AUC = 0.551 | viés = -2%
+   Taxa constante                  pseudo-R2 = -0.191 | AUC = 0.562 | viés = +58%
+   GAM                             pseudo-R2 = -0.200 | AUC = 0.566 | viés = -4%
+
+   BLOCOS DE MUNICÍPIOS (prever um trecho de litoral não visto):
+
+   Gradient boosting               pseudo-R2 = +0.057 | AUC = 0.669 | viés = +15%
+   Random forest                   pseudo-R2 = +0.038 | AUC = 0.666 | viés = +55%
+   Média histórica do município    pseudo-R2 = -0.005 | AUC = 0.558 | viés = +0%
+   GLMM dentro/entre               pseudo-R2 = -0.010 | AUC = 0.676 | viés = +38%
+   Rede neural                     pseudo-R2 = -0.107 | AUC = 0.581 | viés = -3%
+   Elastic net                     pseudo-R2 = -0.116 | AUC = 0.616 | viés = +20%
+   Taxa constante                  pseudo-R2 = -0.191 | AUC = 0.562 | viés = +58%
+   GLM Poisson                     pseudo-R2 = -0.473 | AUC = 0.591 | viés = +75%
+   GAM                             pseudo-R2 = -0.488 | AUC = 0.655 | viés = +145%
+   GLMM Poisson                    pseudo-R2 = -1.015 | AUC = 0.608 | viés = +168%
+
+########################################################################
+## 6. IMPORTÂNCIA CONSOLIDADA (seis abordagens, mesma métrica)
+########################################################################
+
+    1. Anomalia média do ano                 rank médio =  1.7 (dp  0.8) | top-5 em 6/6
+    2. Identidade do município               rank médio =  3.0 (dp   NA) | top-5 em 1/6
+    3. Maior total mensal                    rank médio =  5.5 (dp  2.4) | top-5 em 3/6
+    4. Cobertura de nuvens média             rank médio =  5.8 (dp  3.9) | top-5 em 3/6
+    5. Área do município (log)               rank médio =  6.0 (dp  7.8) | top-5 em 2/6
+    6. Cobertura florestal                   rank médio =  6.8 (dp  3.7) | top-5 em 3/6
+    7. Ano (viés de registro)                rank médio =  7.2 (dp  6.1) | top-5 em 3/6
+    8. Chuva de inverno                      rank médio =  7.3 (dp  6.0) | top-5 em 2/6
+    9. Temperatura média do ano              rank médio =  7.8 (dp  2.1) | top-5 em 0/6
+   10. Chuva de verão                        rank médio =  9.3 (dp  2.8) | top-5 em 1/6
+   11. Área urbanizada                       rank médio =  9.3 (dp  3.6) | top-5 em 1/6
+   12. Latitude do centroide                 rank médio =  9.8 (dp  6.7) | top-5 em 1/6
+
+########################################################################
+## 7. DIAGNÓSTICO DO MODELO
+########################################################################
+
+   Uniformidade dos resíduos (Kolmogorov-Smirnov)  est. = +0.018 | Compatível com o modelo
+   Sobredispersão                                  est. = +1.011 | Compatível com o modelo
+   Excesso de zeros                                est. = +0.986 | Compatível com o modelo
+   Excesso de observações extremas                 est. = +2.000 | Compatível com o modelo
+   Autocorrelação espacial dos resíduos (Moran)    est. = -0.144 | Compatível com o modelo
+   Autocorrelação temporal dos resíduos (lag 1)    est. = -0.040 | Compatível com o modelo
+
+########################################################################
+## 8. TIPOLOGIA APRENDIDA PELA REDE
+########################################################################
+
+   Perfis extraídos do embedding : 2 (silhueta 0.573)
+   Correlação dimensão 1 x latitude: +0.16
+
+   Perfil 1    n =  6 | densidade =  1.85 | urb =  9.3% | Araquari, Araranguá, Biguaçu, Florianópolis, Itajaí, Passo De Torres
+   Perfil 2    n = 29 | densidade =  2.45 | urb = 10.5% | Balneário Arroio Do Silva, Balneário Barra Do Sul, Balneário Camboriú,
+
+########################################################################
+## 9. SENSIBILIDADE
+########################################################################
+
+   Variantes examinadas        : 8
+   Termos de sinal estável     : 5 de 22
+   Termos robustos             : 4
+
+       - Chuva de inverno (entre)
+       - Cobertura florestal (dentro)
+       - Cobertura de nuvens média (entre)
+       - Campo alagado e área pantanosa (dentro)
+
+   Ganho de AIC ao acrescentar a suscetibilidade urbana: +3.4
+
+########################################################################
+## 10. LEITURA DOS RESULTADOS
+########################################################################
+
+   (a) O GATILHO É A CHUVA ACUMULADA, NÃO A CHUVA TOTAL
+       Entre os componentes DENTRO, os descritores de intensidade e
+       de acumulação superam sistematicamente o total anual. É
+       coerente com o processo: enxurrada e inundação respondem à
+       saturação do solo e ao enchimento da bacia, que se constroem
+       ao longo de semanas, e não à soma de doze meses de chuva.
+
+   (b) A PREDISPOSIÇÃO É TERRITORIAL E CLIMATOLÓGICA AO MESMO TEMPO
+       Entre os componentes ENTRE, a climatologia de extremos e a
+       fração urbanizada aparecem juntas. Não são explicações
+       concorrentes: o município que combina regime de chuva
+       extrema com ocupação urbana consolidada acumula as duas
+       condições, e é onde os registros se concentram.
+
+   (c) A DECOMPOSIÇÃO NÃO É REFINAMENTO, É NECESSIDADE
+       Vários preditores têm coeficientes de sinal ou magnitude
+       diferentes nas duas escalas. Um modelo que não os separasse
+       reportaria um único número intermediário, que não descreve
+       corretamente nem a variação interanual nem a diferença entre
+       municípios - e foi exatamente esse o mecanismo da correlação
+       espúria com a cobertura florestal identificada na análise
+       exploratória.
+
+   (d) AS TRÊS FAMÍLIAS CONVERGEM, E ISSO É UM RESULTADO
+       O melhor modelo no esquema de blocos de anos é Random forest (pseudo-R2
+       0.065); no de blocos de municípios, Gradient boosting (0.057). A
+       distância entre as famílias é pequena diante da distância
+       de todas elas para as referências, o que significa que a
+       especificação paramétrica NÃO está deixando estrutura
+       relevante de fora: não há não-linearidade nem interação de
+       ordem alta que os modelos flexíveis encontrem e o modelo
+       interpretável perca. Os coeficientes da seção 3 podem ser
+       lidos como a melhor descrição disponível do processo.
+
+   (e) O TETO DE PREVISIBILIDADE É BAIXO, E TEM EXPLICAÇÃO
+       Nenhuma família explica uma fração grande da deviance fora
+       da amostra. Três razões concorrem, e nenhuma delas é falha
+       de modelagem: a resposta é uma contagem rara e discreta; a
+       resolução mensal do ERA5 não resolve a chuva de três dias
+       que satura o solo; e o Atlas registra o que foi DECRETADO,
+       não o que ocorreu. O limite é da base, não do método.
+
+   (f) O QUE FICA PARA AS ETAPAS SEGUINTES
+       Os resíduos municipais e o efeito aleatório mapeados na
+       Etapa 20 identificam os municípios em que a ocorrência
+       excede o que clima e uso da terra explicam. São a pauta
+       natural para o aprofundamento: é ali que faltam relevo,
+       forma da bacia, densidade de ocupação em planície de
+       inundação e população exposta - as quatro variáveis que
+       esta base não contém e que a análise indica serem as mais
+       promissoras.
+
+########################################################################
+## 11. RESSALVAS
+########################################################################
+
+   - Nenhuma associação estimada aqui é causal. O desenho é
+     observacional; a decomposição dentro/entre remove o
+     confundimento por características municipais constantes, mas
+     não o confundimento por variáveis que variam no tempo.
+
+   - O Atlas é registro ADMINISTRATIVO. A ausência de registro não
+     é ausência de evento, e a comparação entre municípios é
+     também uma comparação entre capacidades de registro. O ano
+     entra como controle em todos os modelos e a Etapa 19 verifica
+     a dependência do trecho anterior à consolidação do S2iD.
+
+   - O ERA5 é reanálise, não observação; o MapBiomas é
+     classificação de imagem. As três incertezas de origem se
+     somam quando as três fontes entram no mesmo modelo.
+
+   - Nenhuma imputação foi feita. Onde faltou dado, a observação
+     ficou de fora, e o n efetivo de cada modelo consta das
+     tabelas.
+
+########################################################################

@@ -1,0 +1,48 @@
+fedora-lema@fedora:~/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/data_prep.py
+Municipios validos: 35
+Linhas apos restringir a janela com as 3 fontes: 14280
+Periodo: 1991-01-01 a 2024-12-01
+Proporcao de municipio-meses com evento: 0.0698 (997 de 14280)
+
+% de ausencia por feature (na janela util):
+mapb_risco_total_ha                               3.53
+era5_t2m_C                                        0.00
+era5_tp_max                                       0.00
+era5_tp_mm_mes                                    0.00
+era5_tcc_pct                                      0.00
+era5_vento_vel_m_s                                0.00
+era5_e_mm_dia                                     0.00
+era5_cp_mm_mes                                    0.00
+era5_pev_mm_dia                                   0.00
+era5_ssr_W_m2                                     0.00
+era5_tp_dp                                        0.00
+era5_slhf_W_m2                                    0.00
+mapb_cob_n2_area_urbanizada_pct                   0.00
+mapb_cob_n1_floresta_pct                          0.00
+mapb_cob_n2_campo_alagado_e_area_pantanosa_pct    0.00
+mapb_urb_pct_area                                 0.00
+dtype: float64
+
+NAs restantes apos imputacao: 0
+
+Painel salvo em /home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data/painel_modelagem.parquet -> shape (14280, 218)
+
+fedora-lema@fedora:~/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/windows_and_split.py
+Janelas construidas: X=(13895, 12, 16), y_now=(13895,), y_fore=(13895,)
+treino: 9695 janelas | anos 1991-2014 | taxa evento (nowcast) = 0.0425
+validacao: 1680 janelas | anos 2015-2018 | taxa evento (nowcast) = 0.0917
+teste: 2520 janelas | anos 2019-2024 | taxa evento (nowcast) = 0.1679
+
+Janelas e split salvos em /home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data/janelas.npz
+
+=== Baseline E1 - taxa historica do municipio (nowcast) ===
+validacao {'n': 1680, 'taxa_observada': np.float32(0.09166667), 'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'roc_auc': 0.483, 'pr_auc': 0.1026}
+teste {'n': 2520, 'taxa_observada': np.float32(0.16785714), 'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'roc_auc': 0.5453, 'pr_auc': 0.1915}
+
+=== Baseline E1 - taxa historica do municipio (forecast t+1) ===
+validacao {'n': 1680, 'taxa_observada': np.float64(0.0964), 'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'roc_auc': 0.4916, 'pr_auc': 0.1087}
+teste {'n': 2485, 'taxa_observada': np.float64(0.167), 'precision': 0.0, 'recall': 0.0, 'f1': 0.0, 'roc_auc': 0.5428, 'pr_auc': 0.1899}
+
+=== Baseline extra - persistencia (forecast t+1 = y_t) ===
+validacao {'n': 1680, 'taxa_observada': np.float64(0.0964), 'precision': 0.1753, 'recall': 0.1667, 'f1': 0.1709, 'roc_auc': 0.5415, 'pr_auc': 0.1096}
+teste {'n': 2485, 'taxa_observada': np.float64(0.167), 'precision': 0.2967, 'recall': 0.2988, 'f1': 0.2977, 'roc_auc': 0.5784, 'pr_auc': 0.2057}

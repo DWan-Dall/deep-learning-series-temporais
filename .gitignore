@@ -1,0 +1,19 @@
+# Ambiente virtual
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Dados processados / grandes
+data/*.parquet
+data/*.npz
+data/*.RData
+data/*.rds
+
+# Modelos treinados
+outputs/*.pt
+outputs/*.pth
+outputs/*.pkl
+outputs/*.joblib

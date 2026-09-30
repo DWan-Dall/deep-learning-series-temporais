@@ -1,0 +1,6 @@
+experimento,horizonte,limiar,precision,recall,f1,roc_auc,pr_auc
+E1 baseline (taxa historica),Nowcast,0.0578,0.2222,0.1891,0.2043,0.5453,0.1915
+E1 baseline (taxa historica),Forecast t+1,0.0578,0.2197,0.188,0.2026,0.5428,0.1899
+extra: persistencia,Forecast t+1,0.5,0.2967,0.2988,0.2977,0.5784,0.2057
+E2 LSTM nowcast,Nowcast,0.5154,0.2317,0.4184,0.2982,0.5897,0.2389
+E3 LSTM forecast,Forecast t+1,0.4994,0.1758,0.3542,0.235,0.5108,0.1876
