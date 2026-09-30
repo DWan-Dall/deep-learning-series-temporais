@@ -2,7 +2,7 @@
 
 ## Problema 3: Predição/Classificação de Séries Temporais com RNN/LSTM/GRU
 
-**Autora:** Daiane Wan-Dall
+**Autora:** Daiane Wan-Dall Splitter da Silva
 **Disciplina:** Aprendizado Profundo — PPGCA/UNIVALI — Prof. Felipe Viel — 2026/2
 
 ---

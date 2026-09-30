@@ -1,6 +1,6 @@
 """
 Pipeline de dados - Trabalho Final de Aprendizado Profundo (Problema 3: séries temporais)
-Daiane Wan-Dall - PPGCA/UNIVALI
+Daiane Wan-Dall Splitter da Silva - PPGCA/UNIVALI
 
 Le a base Consolidado (municipio x mes), constroi a variavel resposta binaria
 (ocorreu algum desastre no municipio-mes), seleciona as features climaticas
