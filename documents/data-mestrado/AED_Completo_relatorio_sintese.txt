@@ -1,0 +1,170 @@
+########################################################################
+## ANÁLISE EXPLORATÓRIA INTEGRADA - DESASTRES, CLIMA E USO DA TERRA
+## Litoral de Santa Catarina | 1991-2025
+## Gerado em 20/08/2026 21:42
+########################################################################
+
+1. COBERTURA E TAMANHO AMOSTRAL
+   Municípios com resposta    : 35
+   Município-meses analisados : 14.700 (35 anos x 420 meses)
+   Registros de desastre      : 1.191 em 1.061 município-meses (7.2%)
+   Eventos por município      : mínimo 10, mediana 28, máximo 66
+   Janela com as três fontes  : 1991-2024
+
+2. A VARIÁVEL RESPOSTA
+   Hidrológico     732 eventos ( 61.5%) | 35 municípios atingidos
+   Meteorológico   337 eventos ( 28.3%) | 35 municípios atingidos
+   Outros           80 eventos (  6.7%) | 20 municípios atingidos
+   Climatológico    42 eventos (  3.5%) | 19 municípios atingidos
+   Razão variância/média      : Mensal, município = 1.23 | Anual, município = 2.55 | Mensal, litoral = 7.31 | Anual, litoral = 29.80
+
+3. O VIÉS DE REGISTRO (achado central)
+   Eventos x ano              : rho = +0.815
+   Meses extremos x ano       : rho = +0.024
+   Eventos por ano            : 18.7 (1991-2011) -> 57.1 (2012-2025), fator 3.1
+   Extremos por ano           : 26.0 -> 21.1, fator 0.81
+   Leitura: a série de desastres mede, em parte, a evolução do
+   sistema de registro. Modelos que usem o tempo como preditor
+   estarão estimando burocracia.
+
+4. SAZONALIDADE
+   Hidrológico    pico em Jan (índice 2.44) | mínimo em Jul
+   Meteorológico  pico em Jul (índice 2.14) | mínimo em Jun
+   Climatológico  pico em Jun (índice 2.00) | mínimo em Out
+   Outros         pico em Mai (índice 1.65) | mínimo em Fev
+
+5. DOSE-RESPOSTA (probabilidade de evento por percentil local)
+   Hidrológico x precipitação : 1.4% -> 17.0% (fator 12.4)
+   Meteorológico x vento      : 1.2% -> 3.7% (fator 3.0)
+   Climatológico x chuva 3 m  : 0.60% -> 0.00% (relação INVERSA)
+
+6. EXTREMOS CLIMÁTICOS
+   Chuva extrema (> p95)   P(evento) 19.64% vs  6.46% (fator  3.0) | 16.0% dos eventos
+   Seca extrema (< p5)     P(evento)  4.76% vs  7.29% (fator  0.7) |  2.3% dos eventos
+   Vento extremo (> p95)   P(evento) 14.29% vs  6.79% (fator  2.1) | 10.7% dos eventos
+
+7. ESTRUTURA TEMPORAL
+   Série bruta                       ACF(1) = +0.312 | Tendência determinística
+   Sem sazonalidade                  ACF(1) = +0.326 | Tendência determinística
+   Sem sazonalidade e sem tendência  ACF(1) = +0.156 | Estacionária
+   Correlação cruzada máxima  : 0.366 na defasagem 0 (contemporânea)
+   Municípios com pico em defasagem zero: 31 de 35
+
+8. TENDÊNCIAS COMPARADAS
+   Registros de desastre (total)     tau = +0.622 | Crescente
+   Registros - Outros                tau = +0.566 | Crescente
+   Registros - Hidrológico           tau = +0.533 | Crescente
+   Registros - Meteorológico         tau = +0.529 | Crescente
+   Registros - Climatológico         tau = +0.331 | Crescente
+   Município-meses de vento extremo  tau = +0.096 | Sem tendência detectada
+   Município-meses de chuva extrema  tau = +0.035 | Sem tendência detectada
+
+9. USO DA TERRA E EXPOSIÇÃO (correlação bruta -> parcial)
+   Cobertura florestal (%)       +0.529 -> +0.153
+   Mancha urbana (% da área)     -0.166 -> -0.299
+   Mancha urbana (ha)            +0.209 -> +0.095
+   Área não vegetada (%)         -0.245 -> -0.323
+   Área urbana suscetível (ha)   +0.289 -> +0.076
+   Fração urbana suscetível (%)  +0.172 -> -0.041
+   Área do município (km²)       +0.379 -> +0.396
+   Precipitação média (mm/mês)   +0.362 -> +0.289
+   Vento médio (m/s)             -0.482 -> -0.215
+   Temperatura média (°C)        +0.236 -> -0.213
+   Latitude do centroide         +0.560 -> NA
+
+10. REDUNDÂNCIA ENTRE DESCRITORES
+   VIF máximo no conjunto completo (15 variáveis): 1150.2
+   VIF máximo no conjunto reduzido (5 variáveis): 1.9
+   Conjunto reduzido sugerido : Precipitação total, Velocidade do vento, Temperatura do ar, Cobertura de nuvens, Precipitação em 3 meses
+
+11. PADRÕES ESPACIAIS
+   Registros de desastre                 I = +0.095 | Sem autocorrelação detectada
+   Registros por mil km²                 I = +0.239 | Agrupamento espacial
+   Participação do grupo hidrológico (%) I = +0.037 | Sem autocorrelação detectada
+   Acoplamento chuva-desastre            I = +0.086 | Sem autocorrelação detectada
+   Tendência do registro (tau)           I = +0.236 | Agrupamento espacial
+   Exposição urbana suscetível (%)       I = +0.453 | Agrupamento espacial
+
+12. ESTRUTURA DE MODELO (ensaios diagnósticos)
+   Poisson + efeito de município           AIC =   5148.5 | dispersão = 0.99
+   Binomial negativo + efeito de município AIC =   5148.8 | dispersão = 0.98
+   Binomial negativo - completo            AIC =   5392.5 | dispersão = 1.84
+   Inflado de zeros (binomial negativo)    AIC =   5394.5 | dispersão = 1.84
+   Poisson - completo                      AIC =   5408.4 | dispersão = 1.92
+   Poisson - clima                         AIC =   5727.2 | dispersão = 2.40
+   Poisson - nulo                          AIC =   6139.4 | dispersão = 1.91
+   Zeros observados = 14.018 | previstos pela Poisson com município = 14.016
+
+13. TIPOLOGIA DOS MUNICÍPIOS
+   Perfis adotados            : 3 (silhueta 0.158)
+   Perfil 1    n = 18 | Araquari, Balneário Barra Do Sul, Barra Velha, Biguaçu, Florianópolis, Garopaba, Garuva,
+   Perfil 2    n =  7 | Araranguá, Balneário Gaivota, Imbituba, Jaguaruna, Laguna, Passo De Torres, Pescaria Bra
+   Perfil 3    n = 10 | Balneário Arroio Do Silva, Balneário Camboriú, Bombinhas, Itajaí, Itapema, Navegantes, P
+
+########################################################################
+## IMPLICAÇÕES PARA A MODELAGEM
+########################################################################
+
+   (a) UNIDADE E FAMÍLIA
+       O município-mês é a unidade adequada, e a resposta é uma
+       CONTAGEM com 93% de zeros. A comparação de modelos mostrou
+       que uma Poisson com efeito de município é suficiente (dispersão 0.99):
+       o binomial negativo não acrescenta ajuste quando o município
+       entra, e a inflação de zeros não é necessária em nenhum caso.
+
+   (b) SEPARAR OS GRUPOS É OBRIGATÓRIO
+       Hidrológico responde à chuva, meteorológico ao vento e
+       climatológico à FALTA de chuva. Um modelo único sobre o total
+       soma respostas de sinais opostos para a mesma variável e
+       diluiria todos os efeitos.
+
+   (c) O VIÉS DE REGISTRO PRECISA ENTRAR NO MODELO
+       Um termo de período (ou de tendência administrativa) é
+       obrigatório. Sem ele, o degrau de 2012 é absorvido pelos
+       coeficientes climáticos e produz efeito climático espúrio.
+       A alternativa mais conservadora é restringir a análise a
+       2012-2025, ao custo de dois terços da série.
+
+   (d) PREDITORES: UM POR BLOCO, EM PERCENTIL LOCAL, SEM DEFASAGEM
+       O VIF cai de 1150 para 1.9 ao reduzir o conjunto. O percentil
+       local remove clima e sazonalidade de uma vez, e a relação é
+       contemporânea - termos defasados não encontram respaldo.
+
+   (e) EXPOSIÇÃO
+       O número de registros cresce com a área do município, e esse
+       é o único efeito territorial que sobrevive ao controle da
+       latitude. Offset de área (ou de mancha urbana, ou de
+       população) é necessário para não confundir tamanho com risco.
+
+   (f) EXTREMOS NÃO BASTAM
+       Meses acima do percentil 95 de chuva concentram apenas 16% dos
+       eventos. Restringir a análise a extremos descartaria a maior
+       parte do fenômeno; a vulnerabilidade do território pesa tanto
+       quanto o gatilho meteorológico.
+
+   (g) ESPAÇO
+       Há autocorrelação espacial em vários indicadores municipais.
+       O efeito de município já absorve boa parte dela; um termo
+       espacial explícito só se justifica se o objetivo for
+       predição para municípios não observados.
+
+   (h) USO DA TERRA COM CAUTELA
+       As associações brutas entre uso da terra e desastres são
+       dominadas pelo gradiente latitudinal. Só devem entrar em
+       modelo com controle explícito de posição e tamanho, e a
+       fração urbana suscetível é o descritor mais defensável.
+
+   (i) O QUE ESTA BASE NÃO RESOLVE
+       Acumulação sub-mensal (a chuva de três dias que satura o
+       solo), intensidade do dano por evento além do registrado no
+       Atlas, e população exposta - que a base não contém e que
+       seria o denominador natural de qualquer taxa de risco.
+
+   (j) RESSALVAS DE ORIGEM QUE ATRAVESSAM TUDO
+       ERA5 é reanálise, não observação; o Atlas é registro
+       ADMINISTRATIVO, e sua ausência não significa ausência de
+       desastre; o MapBiomas é classificação de imagem. As três
+       incertezas se somam quando as três fontes entram no mesmo
+       modelo.
+
+########################################################################
