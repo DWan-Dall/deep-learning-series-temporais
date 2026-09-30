@@ -1,4 +1,4 @@
-fedora-lema@fedora:~/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/data_prep.py
+fedora-lema@fedora:/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/data_prep.py
 Municipios validos: 35
 Linhas apos restringir a janela com as 3 fontes: 14280
 Periodo: 1991-01-01 a 2024-12-01
@@ -27,7 +27,7 @@ NAs restantes apos imputacao: 0
 
 Painel salvo em /home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data/painel_modelagem.parquet -> shape (14280, 218)
 
-fedora-lema@fedora:~/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/windows_and_split.py
+fedora-lema@fedora:/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais$ python3 src/windows_and_split.py
 Janelas construidas: X=(13895, 12, 16), y_now=(13895,), y_fore=(13895,)
 treino: 9695 janelas | anos 1991-2014 | taxa evento (nowcast) = 0.0425
 validacao: 1680 janelas | anos 2015-2018 | taxa evento (nowcast) = 0.0917

@@ -9,7 +9,7 @@ from sklearn.metrics import (
     average_precision_score, confusion_matrix,
 )
 
-DATA_DIR = "/home/claude/tf_dl_projeto/data"
+DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
 WINDOW = 12
 
 # Split temporal (ver justificativa no relatorio: teste inteiramente no

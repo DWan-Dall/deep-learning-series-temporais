@@ -14,7 +14,7 @@ from sklearn.metrics import roc_auc_score
 
 from model_rnn import RNNClassifier, carregar, to_tensors, DEVICE, SEED
 
-OUT_DIR = "/home/claude/tf_dl_projeto/outputs"
+OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
 
 
 def treinar_com_log(model, Xtr, ytr, Xval, yval, epochs=30, lr=1e-3, batch_size=128):

@@ -1,6 +1,0 @@
-experimento,horizonte,conjunto,roc_auc,pr_auc,f1
-E1 baseline (taxa historica),nowcast,teste,0.5453,0.1915,0.0
-E1 baseline (taxa historica),forecast t+1,teste,0.5428,0.1899,0.0
-extra: persistencia,forecast t+1,teste,0.5784,0.2057,0.2977
-E2 LSTM,nowcast,teste,0.5897,0.2389,0.2875
-E3 LSTM,forecast t+1,teste,0.5108,0.1876,0.2862

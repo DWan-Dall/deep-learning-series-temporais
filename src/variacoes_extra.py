@@ -14,13 +14,13 @@ import numpy as np
 import pandas as pd
 import torch
 
-sys.path.insert(0, "/home/claude/tf_dl_projeto/src")
+sys.path.insert(0, "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/src")
 from windows_and_split import build_windows, split_mask
 from model_rnn import RNNClassifier, treinar, DEVICE, SEED
 from calibrar_limiar import melhor_limiar_f1, metrics_com_limiar
 
-DATA_DIR = "/home/claude/tf_dl_projeto/data"
-OUT_DIR = "/home/claude/tf_dl_projeto/outputs"
+DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
+OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)

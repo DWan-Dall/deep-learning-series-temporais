@@ -15,8 +15,8 @@ from sklearn.metrics import (
 
 from model_rnn import RNNClassifier, carregar, to_tensors, DEVICE
 
-DATA_DIR = "/home/claude/tf_dl_projeto/data"
-OUT_DIR = "/home/claude/tf_dl_projeto/outputs"
+DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
+OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
 MELHOR_CELL = "LSTM"
 
 

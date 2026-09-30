@@ -16,8 +16,8 @@ from sklearn.metrics import (
     precision_score, recall_score, f1_score, roc_auc_score, average_precision_score,
 )
 
-DATA_DIR = "/home/claude/tf_dl_projeto/data"
-OUT_DIR = "/home/claude/tf_dl_projeto/outputs"
+DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
+OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
 SEED = 42
 
 torch.manual_seed(SEED)

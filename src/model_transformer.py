@@ -18,7 +18,7 @@ import torch.nn as nn
 from model_rnn import carregar, to_tensors, treinar, avaliar, DEVICE, SEED
 from calibrar_limiar import melhor_limiar_f1, metrics_com_limiar
 
-OUT_DIR = "/home/claude/tf_dl_projeto/outputs"
+OUT_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/outputs"
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)

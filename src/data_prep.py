@@ -14,7 +14,7 @@ Tambem define o split temporal treino/validacao/teste.
 import numpy as np
 import pandas as pd
 
-DATA_DIR = "/home/claude/tf_dl_projeto/data"
+DATA_DIR = "/home/fedora-lema/Documentos/Pessoal/Mestrado/deep-learning-series-temporais/data"
 WINDOW = 12  # meses de historico usados como entrada da rede
 
 # ---------------------------------------------------------------------------

@@ -1,3 +1,0 @@
-experimento,horizonte,n_parametros,melhor_epoca_val,limiar,precision,recall,f1,roc_auc,pr_auc
-Transformer (extra),Nowcast,18049,17,0.5594,0.2403,0.3972,0.2995,0.5999,0.263
-Transformer (extra),Forecast t+1,18049,1,0.4849,0.188,0.5518,0.2805,0.5531,0.1888
