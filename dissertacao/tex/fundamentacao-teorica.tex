@@ -1,0 +1,147 @@
+% =====================================================================
+% FUNDAMENTAÇÃO TEÓRICA (Referencial Teórico)
+% Reúna os conceitos necessários para o leitor compreender o trabalho.
+% Este capítulo demonstra: citação (indireta, direta curta com \enquote, direta
+% longa com o ambiente citacao, grifo nosso, supressão [...] e apud), uso correto
+% de siglas (declarar uma vez, depois \gls{}), nota de rodapé, figura, equação,
+% alíneas (ABNT) e listas.
+% =====================================================================
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua~\parencite{exemplo-livro}. Ut enim ad
+minim veniam, quis nostrud exercitation ullamco laboris.
+
+% =====================================================================
+% SIGLAS — A REGRA: DECLARE UMA VEZ, DEPOIS SEMPRE \gls{}
+% =====================================================================
+% NBR 14724:2024, 5.6: "A sigla, quando mencionada pela primeira vez no texto,
+% deve ser indicada entre parênteses, precedida pelo nome completo" — ex.:
+% Associação Brasileira de Normas Técnicas (ABNT). Nas menções seguintes, só a
+% sigla.
+%
+% 1) DECLARE a sigla uma única vez, de uma destas duas formas (escolha uma):
+%      a) no preâmbulo do thesis.tex:  \nomenclature[S]{ABNT}{Associação...}
+%      b) aqui, na primeira menção:    \sigla{IBGE}{Instituto Brasileiro...}
+%
+% 2) A PARTIR DAÍ, toda menção é \gls{ABNT} / \gls{IBGE} — inclusive a primeira,
+%    se você declarou pelo preâmbulo. O pacote cuida da regra 5.6 sozinho: na
+%    primeira vez que a sigla aparece no texto ele imprime "nome completo
+%    (SIGLA)"; da segunda em diante, apenas "SIGLA". Você NÃO precisa controlar
+%    qual menção é a primeira, nem escrever o nome completo à mão.
+%
+% 3) NÃO digite a sigla como texto puro. Ela sai igual no PDF, mas perde o link
+%    para a entrada na lista de abreviaturas e siglas — e, se for a primeira
+%    menção, não expande (a regra 5.6 fica por sua conta).
+%
+% A chave é a própria sigla, então \gls{IBGE} para a sigla IBGE. Variações:
+% \sigla*{}{} apenas cadastra, sem escrever nada no texto (útil para siglas que
+% só aparecem em figuras ou tabelas), e \sigla[A]{}{} manda a entrada para o
+% grupo "Abreviaturas" em vez de "Siglas".
+As normas de apresentação de trabalhos acadêmicos são publicadas pela
+\gls{ABNT} --- sigla declarada no preâmbulo, cuja primeira menção sai por
+extenso automaticamente. Já os dados populacionais provêm do
+\sigla{IBGE}{Instituto Brasileiro de Geografia e Estatística}, declarado na
+própria linha em que é citado. Nas menções seguintes, ambas aparecem apenas
+como sigla: \gls{ABNT} e \gls{IBGE}, cada uma com link para a entrada na lista.
+
+%-------------------------------------------------------------
+\section{Primeiro conceito}
+\label{sec:conceito-um}
+%-------------------------------------------------------------
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+fugiat nulla pariatur~\parencite{exemplo-artigo}. A \autoref{fig:exemplo} ilustra
+o conceito.
+
+% Citação DIRETA curta (até 3 linhas): fica no corpo do texto, entre aspas, com a
+% fonte e a página logo após (NBR 10520:2023). Use \enquote{...} (csquotes) para as
+% aspas — NUNCA a aspa reta ", que sob XeLaTeX sai como ”...” (fecha nas duas pontas).
+Nesse sentido, \enquote{a citação direta de até três linhas permanece no corpo do
+texto, entre aspas}~\parencite[p. 15]{exemplo-livro}.
+
+% Citação DIRETA LONGA (mais de 3 linhas): destacada em parágrafo próprio, com
+% recuo de 4 cm da margem esquerda, fonte menor, espaço simples e SEM aspas
+% (NBR 10520:2023; guia UNIVALI). Use o ambiente \begin{citacao}...\end{citacao}:
+% o abnTeX2 já aplica recuo (4 cm), \ABNTEXfontereduzida e espaçamento simples.
+% A chamada (autor, ano, página) precede o bloco; não se usam aspas.
+Já a citação com mais de três linhas é destacada do texto, como em
+\textcite[p. 86]{exemplo-livro}:
+
+\begin{citacao}
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+  fugiat nulla pariatur.
+\end{citacao}
+
+% Variações de chamada (NBR 10520:2023): grifo nosso (ao destacar parte da
+% citação), supressão com reticências entre colchetes [...] (trecho omitido) e
+% apud / citação de citação ("Autor original (ano apud Autor consultado, ano,
+% p.)"). A nota de rodapé vai em fonte menor e espaço simples (NBR 14724:2024).
+Ao destacar parte de uma citação, indica-se o grifo na
+chamada~\parencite[p.~22, grifo nosso]{exemplo-artigo}; trechos omitidos são
+marcados com reticências entre colchetes (\enquote{[\ldots] texto restante}).
+Quando se cita uma fonte por meio de outra, usa-se \emph{apud}: para Autor
+Original (1998 apud \citeauthor{exemplo-dissertacao}, \citeyear{exemplo-dissertacao},
+p.~30), o conceito se mantém.\footnote{Esta é uma nota de rodapé: digitada dentro
+das margens, em fonte menor e espaço simples, separada do texto por um filete
+(NBR 14724:2024).}
+
+% --- EXEMPLO DE FIGURA -----------------------------------------------
+% Para usar uma imagem real, troque o conteúdo do \centering pela linha:
+%   \includegraphics[width=0.75\textwidth]{imagens/sua-figura.png}
+% O comando \figuraplaceholder (definido em tex/_placeholders.tex) apenas
+% desenha uma caixa cinza para o template compilar sem imagens externas.
+\begin{figure}[!htb]
+  \caption{Legenda da figura (acima da figura, conforme NBR 14724).}
+  \label{fig:exemplo}
+  \centering
+  % A fonte fica alinhada à margem esquerda DA FIGURA (não do texto).
+  \elementocomfonte{\figuraplaceholder{0.6\textwidth}{4cm}{imagens/sua-figura.png}}%
+    {Fonte: Elaborada pelo autor (\the\year{}).}
+\end{figure}
+
+%-------------------------------------------------------------
+\section{Formulação matemática}
+\label{sec:formulacao}
+%-------------------------------------------------------------
+
+Equações são numeradas e podem ser referenciadas, como mostra a
+\autoref{eq:exemplo}:
+
+\begin{equation}
+  E = m c^{2},
+  \label{eq:exemplo}
+\end{equation}
+
+\noindent onde $E$ é a energia, $m$ a massa e $c$ a velocidade da luz no vácuo.
+At vero eos et accusamus et iusto odio dignissimos ducimus.
+
+%-------------------------------------------------------------
+\section{Síntese}
+%-------------------------------------------------------------
+
+Os principais pontos abordados foram:
+
+\begin{enumerate}[label=(\roman*)]
+  \item primeiro ponto: lorem ipsum dolor sit amet;
+  \item segundo ponto: consectetur adipiscing elit;
+  \item terceiro ponto: sed do eiusmod tempor incididunt.
+\end{enumerate}
+
+% Alíneas (ABNT NBR 6024): subdivisão SEM título dentro de uma seção, quando não
+% se quer numerar com \section. Introduzidas por frase terminada em dois-pontos;
+% cada alínea em letra minúscula, terminando em ";" (a última em "."), ordenadas
+% a) b) c). Ambiente \begin{alineas} (abnTeX2); subdivisão extra: \begin{subalineas}.
+Sem necessidade de títulos, a enumeração também pode ser feita por alíneas:
+
+\begin{alineas}
+  \item primeira alínea, em letra minúscula, terminando em ponto-e-vírgula;
+  \item segunda alínea, que pode se desdobrar em subalíneas:
+  \begin{subalineas}
+    \item primeira subalínea;
+    \item segunda subalínea;
+  \end{subalineas}
+  \item última alínea, terminando em ponto.
+\end{alineas}
