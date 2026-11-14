@@ -36,6 +36,15 @@
 \usepackage[brazil]{babel}
 \usepackage{csquotes}            % recomendado para biblatex + babel
 
+% --- CAIXINHA "CAPÍTULO n" (personalização; ver NORMAS-E-DECISOES.md) ---
+% Liga/desliga a caixinha decorativa no início dos capítulos:
+\caixacapitulotrue        % \caixacapitulofalse = sem caixinha (ABNT pura)
+% Número também na linha do título ("1 INTRODUÇÃO")?
+%   \numeronotitulofalse = só "INTRODUÇÃO" (número aparece na caixinha)
+%   \numeronotitulotrue  = "1 INTRODUÇÃO" (padrão estrito NBR 6024) — use se
+%                          a biblioteca/banca questionar
+\numeronotitulofalse
+
 % Arquivo de referências (biblatex-abnt)
 \addbibresource{referencias.bib}
 

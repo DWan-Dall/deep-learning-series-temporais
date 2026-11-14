@@ -1652,6 +1652,10 @@
 % Sinaliza se o capitulo atual e um apendice/anexo (para prefixar APÊNDICE/ANEXO
 % no titulo). Ligado pelos ambientes apendicesenv/anexosenv (ver apos \chapterstyle).
 \newif\ifppgapendice\ppgapendicefalse
+% Chaves da caixinha de capitulo (ver NORMAS-E-DECISOES.md). Padrao: caixinha
+% ligada e numero so na caixinha. Altere no preambulo do thesis.tex.
+\newif\ifcaixacapitulo\caixacapitulotrue
+\newif\ifnumeronotitulo\numeronotitulofalse
 
 \makechapterstyle{ppg}{%
   \renewcommand{\chapterheadstart}{} 
@@ -1715,23 +1719,35 @@
         % capitulos normais, so "1 Titulo". \ifppgapendice e ligado pelos
         % ambientes apendicesenv/anexosenv (ver patch abaixo).
         % --- Caixinha decorativa "CAPÍTULO n" (herdada do modelo MCA/IEEE) ---
-        % Linha fina ate a caixa, faixa preta com CAPITULO/APÊNDICE/ANEXO e o
-        % numero/letra grande embaixo. O titulo ABNT ("1 TITULO") continua logo
-        % abaixo, intacto. Para remover, basta apagar este bloco.
-        {\noindent\hrulefill
-        {\renewcommand{\arraystretch}{1.5}%
-        \begin{tabular}{|c|}
-            \rowcolor{black}\color{white}\normalsize\rmfamily
-              \MakeUppercase{\@chapapp}\\
-            \vspace{-1.5ex}\\
-            \resizebox{!}{1.1cm}{\rmfamily\thechapter}\\[2.5ex]
-            \hline
-        \end{tabular}}\par}%
-        \vskip 3ex
+        % Ver NORMAS-E-DECISOES.md. Controlada por duas chaves (thesis.tex):
+        %   \caixacapitulotrue / \caixacapitulofalse  -> mostra/oculta a caixinha
+        %   \numeronotitulotrue / \numeronotitulofalse -> "1 TITULO" / "TITULO"
+        % Com a caixinha DESLIGADA o numero volta SEMPRE ao titulo (ABNT pura).
+        \ifcaixacapitulo
+          {\noindent
+          {\renewcommand{\arraystretch}{1.5}%
+          \begin{tabular}{|c|}
+              \rowcolor{black}\color{white}\normalsize\rmfamily
+                \MakeUppercase{\@chapapp}\\
+              \vspace{-1.5ex}\\
+              \resizebox{!}{1.1cm}{\rmfamily\thechapter}\\[2.5ex]
+              \hline
+          \end{tabular}}\hrulefill\par}%
+          \vskip 3ex
+        \fi
         % --- fim da caixinha ---
         \raggedright\chaptitlefont
-        \ifppgapendice\MakeUppercase{\@chapapp}\space\fi
-        \thechapter\hspace{0.5em}\ABNTEXchapterupperifneeded{##1}%
+        \ifppgapendice
+          % Apendice/anexo: SEMPRE "APÊNDICE A TITULO" (NBR 14724, 4.3.2/4.3.3)
+          \MakeUppercase{\@chapapp}\space\thechapter\hspace{0.5em}%
+        \else
+          \ifcaixacapitulo
+            \ifnumeronotitulo\thechapter\hspace{0.5em}\fi
+          \else
+            \thechapter\hspace{0.5em}%
+          \fi
+        \fi
+        \ABNTEXchapterupperifneeded{##1}%
     }%
   }
 

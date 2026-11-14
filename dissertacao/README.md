@@ -390,14 +390,15 @@ sujeitas às suas próprias licenças. Veja <https://www.latex-project.org/lppl/
 ## Personalização deste fork: caixinha "CAPÍTULO n"
 
 Esta cópia do template UNIVALI é idêntica à original, **exceto** pela caixinha
-decorativa no início de cada capítulo numerado (faixa preta com "CAPÍTULO",
-número grande embaixo e linha horizontal à esquerda), herdada do modelo
-MCA/IEEE. Nos apêndices/anexos a caixa mostra "APÊNDICE"/"ANEXO" e a letra.
+decorativa à esquerda no início de cada capítulo numerado (faixa preta com
+"CAPÍTULO" e o número grande), herdada do modelo MCA/IEEE.
 
-O título no padrão ABNT ("1 INTRODUÇÃO", negrito, 12 pt, à esquerda) continua
-logo abaixo, sem alteração. Títulos sem número (Resumo, Sumário, Referências...)
-não recebem caixa.
+Duas chaves no preâmbulo do `thesis.tex` controlam o visual:
 
-A mudança está em `packages/ppg.cls`, no `\printchaptertitle`, entre os
-comentários `--- Caixinha decorativa ---` e `--- fim da caixinha ---`. Para
-voltar ao visual 100% ABNT, basta apagar esse bloco.
+- `\caixacapitulotrue` / `\caixacapitulofalse`: liga/desliga a caixinha
+  (desligada = layout UNIVALI original).
+- `\numeronotitulofalse` / `\numeronotitulotrue`: título só "INTRODUÇÃO"
+  (número na caixinha) ou "1 INTRODUÇÃO" (padrão estrito NBR 6024).
+
+Normas seguidas, decisões tomadas e argumentos para eventuais questionamentos:
+veja **[NORMAS-E-DECISOES.md](NORMAS-E-DECISOES.md)**.
